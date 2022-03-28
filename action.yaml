@@ -1,0 +1,6 @@
+# action.yaml
+name: 'Blog Custom Github Action'
+description: 'Action Testing'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
