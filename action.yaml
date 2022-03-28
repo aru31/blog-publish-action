@@ -1,6 +1,22 @@
 # action.yaml
 name: 'Blog Custom Github Action'
 description: 'Action Testing'
+
+inputs:
+  test_variable:
+    description: 'Test Variable'
+    required: true
+  token_github:
+    description: 'The token to use to access the GitHub API'
+    required: true
+  token_random:
+    description: 'This is a random token which is not required'
+    required: false
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.test_variable }}
+    - ${{ inputs.token_random }}
+    - ${{ inputs.token_github }}
