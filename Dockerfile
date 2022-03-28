@@ -1,17 +1,16 @@
-FROM alpine:latest
+FROM python:alpine3.15
 
-# installes required packages for our script
-RUN apk add --no-cache \
-  bash \
-  ca-certificates \
-  curl \
-  jq
+# copy the requirements.txt file and run it.
+
 
 # Copies your code file  repository to the filesystem
-COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /app/entrypoint.sh
 
 # change permission to execute the script and
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+# copying code for running
+COPY src /app
 
 # file to execute when the docker container starts up
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]

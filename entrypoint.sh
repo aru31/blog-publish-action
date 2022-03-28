@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# to exit if there is any status code of non zero
 set -e
 
 echo "Hello from the bash world"
