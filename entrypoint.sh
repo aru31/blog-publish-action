@@ -4,5 +4,5 @@
 set -e
 
 echo "Hello from the bash world"
-echo "test variable -> ${INPUT_TEST_VARIABLE}"
-python3 /app/src/main.py ${INPUT_TOKEN_DEVTO}
+echo "website -> ${INPUT_WEBSITE}"
+python3 /app/src/main.py ${INPUT_TOKEN}

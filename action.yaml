@@ -3,24 +3,20 @@ name: 'Blog Custom Github Action'
 description: 'Action Testing'
 
 inputs:
-  test_variable:
-    description: 'Test Variable'
+  website:
+    description: 'Website to which you want to publish'
     required: true
   token_github:
     description: 'The token to use to access the GitHub API'
     required: true
-  token_random:
-    description: 'This is a random token which is not required'
-    required: false
-  token_devto:
-    description: 'The token to use to access the DevTo API'
-    required: false
+  token:
+    description: 'The token to use to access the blogging website'
+    required: true
 
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.test_variable }}
-    - ${{ inputs.token_random }}
+    - ${{ inputs.website }}
     - ${{ inputs.token_github }}
-    - ${{ inputs.token_devto }}
+    - ${{ inputs.token }}
