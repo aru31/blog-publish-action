@@ -5,4 +5,5 @@ set -e
 
 echo "Hello from the bash world"
 echo "website -> ${INPUT_WEBSITE}"
-python3 /app/src/main.py ${INPUT_TOKEN}
+
+python3 /app/src/main.py ${INPUT_TOKEN} ${INPUT_WEBSITE}
