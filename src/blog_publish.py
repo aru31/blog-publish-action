@@ -1,6 +1,6 @@
 import frontmatter
 from urllib import request
-from devto import devto_create
+from devto import devto_create, devto_update
 from findfiles import FindFiles
 from constants import GITHUB_CODES, API_URLS
 from custom_exceptions import UpdationNotImplemented, WrongURLException
@@ -16,7 +16,6 @@ class BlogPublishAPI(object):
         try:
             # downloading the file with the same name will override the previous file
             request.urlretrieve(url, "blog.md")
-            # check if this logging works in the GitHub console
             print(f"Downloading file -> {filename}")
         except Exception as e:
             print(f"Error message : {e}")
@@ -48,4 +47,5 @@ class BlogPublishAPI(object):
                 devto_create(metadata=self.metadata, content=self.content,
                              apikey=self.apikey, url=API_URLS.DEVTO)
             if file_info["status"] == GITHUB_CODES.MODIFIED:
-                raise UpdationNotImplemented("dev.to")
+                # raise UpdationNotImplemented("dev.to")
+                devto_update()

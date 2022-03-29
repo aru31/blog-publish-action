@@ -4,6 +4,12 @@ class WebsiteNotSupported(Exception):
         super().__init__(message)
 
 
+class UpdationWillNotBeImplemented(Exception):
+    def __init__(self, info=""):
+        message = f'Updation will not be implemented for the above reason, website : {info}'
+        super().__init__(message)
+
+
 class UpdationNotImplemented(Exception):
     def __init__(self, info=""):
         message = f'Article updation not implemented for {info}'

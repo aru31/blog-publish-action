@@ -11,7 +11,7 @@ if __name__ == "__main__":
         raise IndexException("api_key, website")
 
     if website == 'devto':
-        c = BlogPublishAPI(sys.argv[1])
-        c.devto_publish()
+        blog_api = BlogPublishAPI(sys.argv[1])
+        blog_api.devto_publish()
     else:
         raise WebsiteNotSupported
