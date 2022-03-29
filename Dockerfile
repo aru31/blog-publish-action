@@ -1,5 +1,6 @@
 FROM python:alpine3.15
 
+RUN apk add --no-cache bash
 # copy the requirements.txt file and run it.
 COPY requirements.txt /app/requirements.txt
 
