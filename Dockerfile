@@ -13,7 +13,7 @@ COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
 # copying code for running
-COPY src /app
+COPY src /app/src
 
 # file to execute when the docker container starts up
 ENTRYPOINT ["/app/entrypoint.sh"]
