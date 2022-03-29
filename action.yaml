@@ -12,6 +12,9 @@ inputs:
   token_random:
     description: 'This is a random token which is not required'
     required: false
+  token_devto:
+    description: 'The token to use to access the DevTo API'
+    required: false
 
 runs:
   using: 'docker'
@@ -20,3 +23,4 @@ runs:
     - ${{ inputs.test_variable }}
     - ${{ inputs.token_random }}
     - ${{ inputs.token_github }}
+    - ${{ inputs.token_devto }}

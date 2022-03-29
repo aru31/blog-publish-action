@@ -13,4 +13,5 @@ latest_files = latest_commit.json()["files"]
 for file in latest_files:
     if (file["status"] == "added") or (file["status"] == "modified"):
         get_file_name = file["filename"].split("/")
-        urllib.request.urlretrieve(file["raw_url"], get_file_name[-1])
+        if(get_file_name[-1].split(".")[-1] == "md"):
+            urllib.request.urlretrieve(file["raw_url"], get_file_name[-1])
