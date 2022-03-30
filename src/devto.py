@@ -1,5 +1,5 @@
 import requests
-from custom_exceptions import MissingFrontmatterException, UpdationWillNotBeImplemented
+from custom_exceptions import MissingFrontmatterException
 
 
 def devto_create(metadata, content, apikey, url):
@@ -61,4 +61,4 @@ def devto_update():
     Bad design by dev.to
     """
     print(reason)
-    raise UpdationWillNotBeImplemented("dev.to")
+    # raise UpdationWillNotBeImplemented("dev.to")

@@ -1,12 +1,15 @@
 import frontmatter
 from urllib import request
 from devto import devto_create, devto_update
+from medium import medium_create, medium_update
 from findfiles import FindFiles
-from constants import GITHUB_CODES, API_URLS
+from constants import (
+    GITHUB_CODES,
+    API_URLS,
+    MESSAGES
+)
 from custom_exceptions import (
-    UpdationNotImplemented,
-    WrongURLException,
-    DidnotWantToPublish
+    WrongURLException
 )
 
 
@@ -94,12 +97,25 @@ class BlogPublishAPI(object):
         for file in self.parsedfiles:
             if file["metadata"]["publish_devto"]:
                 if file["fileinfo"]["status"] == GITHUB_CODES.ADDED:
-                    devto_create(metadata=self.metadata, content=self.content,
+                    devto_create(metadata=file["metadata"], content=file["content"],
                                 apikey=self.apikey, url=API_URLS.DEVTO)
                 if file["fileinfo"]["status"] == GITHUB_CODES.MODIFIED:
-                    # raise UpdationNotImplemented("dev.to")
                     devto_update()
             else:
-                raise DidnotWantToPublish(
-                    info="dev.to. publish_devto was set to false"
-                )
+                print(f"{MESSAGES.notpublishmessage} dev.to. publish_devto was set to false")
+
+    def medium_publish(self):
+        """
+        Dev.to publish
+        """
+
+        for file in self.parsedfiles:
+            if file["metadata"]["publish_medium"]:
+                if file["fileinfo"]["status"] == GITHUB_CODES.ADDED:
+                    medium_create(metadata=file["metadata"], content=file["content"],
+                                apikey=self.apikey, url=API_URLS.MEDIUM)
+                if file["fileinfo"]["status"] == GITHUB_CODES.MODIFIED:
+                    medium_update()
+            else:
+                print(f"{MESSAGES.notpublishmessage} medium. publish_medium was set to false")
+

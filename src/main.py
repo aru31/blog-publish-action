@@ -14,5 +14,8 @@ if __name__ == "__main__":
     if website == 'devto':
         blog_api = BlogPublishAPI(apikey=api_key, owner_repo=owner_repo)
         blog_api.devto_publish()
+    elif website == 'medium':
+        blog_api = BlogPublishAPI(apikey=api_key, owner_repo=owner_repo)
+        blog_api.medium_publish()
     else:
         raise WebsiteNotSupported

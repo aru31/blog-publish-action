@@ -64,7 +64,6 @@ class FindFiles:
                 otherfolder/file
                 """
                 get_file_name = file["filename"].split("/")
-
                 # file should be a markdown hence should end with .md
                 if(get_file_name[-1].split(".")[-1] == "md"):
                     '''
@@ -73,11 +72,11 @@ class FindFiles:
                     that are in the blogs folder or in its subfolder
                     '''
                     if(get_file_name[0] == CONSTANTS.FOLDER_NAME):
+                        self.data = dict()
                         self.data["filename"] = get_file_name[-1]
                         self.data["url"] = file["raw_url"]
                         self.data["status"] = file["status"]
 
                         self.useful_files.append(self.data)
-
 
 # c = FindFiles()
