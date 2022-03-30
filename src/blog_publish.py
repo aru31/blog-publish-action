@@ -37,6 +37,14 @@ class BlogPublishAPI(object):
         """
 
         findfiles = FindFiles(self.owner_repo)
+
+        """
+        files sample schema: 
+        [
+            {'filename': 'test_blog.md', 'url': '....', 'status': 'modified'},
+            {...}
+        ]
+        """
         files = findfiles.useful_files
 
         # iterating through all the files (list of dictionaries)
