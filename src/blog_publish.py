@@ -26,6 +26,7 @@ class BlogPublishAPI(object):
         parse the .md file to separate body (content) from frontmatter (metadata)
         """
 
+        print("Parsing the markdown file")
         with open("blog.md") as f:
             self.metadata, self.content = frontmatter.parse(f.read())
 

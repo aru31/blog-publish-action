@@ -13,12 +13,16 @@ class FindFiles:
 
     def __init__(self):
         self.latest_files = None
+        self.files_changed = []
         self.data = {}
         self.useful_files = []
 
+        print("Processing the files")
         self._latestCommitFiles()
         self._requiredFiles()
-        print(f"List of dictionary to be processed : {self.useful_files}")
+        print(f"List of file names that changed : {self.files_changed}")
+        print(
+            f"List of dictionary of files to be processed : {self.useful_files}")
 
     def _latestCommitFiles(self):
         """
@@ -48,7 +52,16 @@ class FindFiles:
         ]
         """
         for file in self.latest_files:
+            self.files_changed.append(file["filename"])
             if (file["status"] != GITHUB_CODES.REMOVED):
+                """
+                Expected patterns of file["filename"]:
+                blogs/blog.md
+                blogs/../blog.md
+                Readme.md
+                someotherfile
+                otherfolder/file
+                """
                 get_file_name = file["filename"].split("/")
 
                 # file should be a markdown hence should end with .md

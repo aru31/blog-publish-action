@@ -16,13 +16,14 @@ def devto_create(metadata, content, apikey, url):
     :param tags: List of article tags
     """
 
+    print("preparing to send the blogs to dev.to")
     try:
         data = {
             "article": {
                 "title": metadata['title'],
                 "body_markdown": content,
                 "published": metadata["published"],
-                "series": metadata["devto_series"],
+                "series": metadata.get("devto_series"),
                 "main_image": None,
                 "canonical_url": None,
                 "description": metadata['description'],
