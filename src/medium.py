@@ -67,7 +67,9 @@ def medium_create(metadata, content, apikey, url):
 
 
 def medium_update():
-    pass
-
+    reason = """
+    Updation is not supported by medium API.
+    """
+    print(reason)
 
 
