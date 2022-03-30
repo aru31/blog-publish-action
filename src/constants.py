@@ -25,4 +25,5 @@ class Messages:
         Either you didn't want to publish the article on {website} 
         and set {variable} to false in markdown frontmatter
         or you forgot to set {variable} in markdown frontmatter
+        or you have used the wrong variable format it should be {variable}: True
         """
