@@ -12,9 +12,6 @@ inputs:
   token:
     description: 'The token to use to access the blogging website'
     required: true
-  repository:
-    description: 'Repository and owner name'
-    required: true
 
 runs:
   using: 'docker'
@@ -23,4 +20,3 @@ runs:
     - ${{ inputs.website }}
     - ${{ inputs.token_github }}
     - ${{ inputs.token }}
-    - ${{ inputs.repository }}

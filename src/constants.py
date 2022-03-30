@@ -8,6 +8,7 @@ class API_URLS:
     DEVTO = "https://dev.to/api/articles"
     HASHNODE = ""
     MEDIUM = ""
+    GITHUB = "https://api.github.com/repos"
 
 
 class CONSTANTS:

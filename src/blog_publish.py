@@ -7,10 +7,11 @@ from custom_exceptions import UpdationNotImplemented, WrongURLException
 
 
 class BlogPublishAPI(object):
-    def __init__(self, apikey):
+    def __init__(self, apikey, owner_repo):
         self.content = None
         self.metadata = None
         self.apikey = apikey
+        self.owner_repo = owner_repo
 
     def download_file(self, url, filename):
         try:
@@ -35,7 +36,7 @@ class BlogPublishAPI(object):
         Dev.to publish
         """
 
-        findfiles = FindFiles()
+        findfiles = FindFiles(self.owner_repo)
         files = findfiles.useful_files
 
         # iterating through all the files (list of dictionaries)

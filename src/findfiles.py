@@ -1,5 +1,5 @@
 import requests
-from constants import GITHUB_CODES, CONSTANTS
+from constants import GITHUB_CODES, CONSTANTS, API_URLS
 
 # TODO:Use env variables for repository
 # Assumption here is that user pushes a single commit each push
@@ -11,7 +11,8 @@ class FindFiles:
     simplifies it to an list of dictionaries containing useful information
     """
 
-    def __init__(self):
+    def __init__(self, owner_repo):
+        self.owner_repo = owner_repo
         self.latest_files = None
         self.files_changed = []
         self.data = {}
@@ -30,13 +31,13 @@ class FindFiles:
         """
 
         all_commits = requests.get(
-            "https://api.github.com/repos/aru31/test-blog-publish/commits")
+            f"{API_URLS.GITHUB}/{self.owner_repo}/commits")
         # getting sha of the latest commit
         latest_sha = all_commits.json()[0]["sha"]
 
         # getting the latest commit
         latest_commit = requests.get(
-            f"https://api.github.com/repos/aru31/test-blog-publish/commits/{latest_sha}")
+            f"{API_URLS.GITHUB}/{self.owner_repo}/commits/{latest_sha}")
         latest_files = latest_commit.json()["files"]
         self.latest_files = latest_files
 

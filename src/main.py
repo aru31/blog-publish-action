@@ -6,12 +6,13 @@ if __name__ == "__main__":
     try:
         api_key = sys.argv[1]
         website = sys.argv[2]
+        owner_repo = sys.argv[3]  # aru31/test-blog-publish
     except IndexError as e:
         print(f"Error Message : {e}")
-        raise IndexException("api_key, website")
+        raise IndexException("api_key, website, owner_repo")
 
     if website == 'devto':
-        blog_api = BlogPublishAPI(sys.argv[1])
+        blog_api = BlogPublishAPI(apikey=api_key, owner_repo=owner_repo)
         blog_api.devto_publish()
     else:
         raise WebsiteNotSupported
