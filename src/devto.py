@@ -2,7 +2,7 @@ import requests
 from custom_exceptions import MissingFrontmatterException
 
 
-def devto_create(metadata, content, apikey, url):
+def devto_create(metadata, content, apikey, url, logger):
     """
     DevTo Publish API
     Reference -> https://developers.forem.com/api#operation/createArticle
@@ -16,7 +16,7 @@ def devto_create(metadata, content, apikey, url):
     :param tags: List of article tags
     """
 
-    print("preparing to send the blogs to dev.to")
+    logger.info("Preparing to send the blogs to dev.to")
     try:
         data = {
             "article": {
@@ -32,8 +32,10 @@ def devto_create(metadata, content, apikey, url):
             }
         }
     except Exception as e:
-        print(f"Error Message : {e}")
+        logger.error(f"Error Message : {e}")
         raise MissingFrontmatterException
+    logger.debug(
+        "Data dictionary formed successfully: means metadata was complete")
 
     # remove None keys from dict
     data = {k: v for k, v in data.items() if v is not None}
@@ -45,20 +47,19 @@ def devto_create(metadata, content, apikey, url):
         Dev.to is horrible in returning the messages and status code, I expect two reasons, 
         either the API key is incorrect or an article with the same title and body already exists.
         """
-        print(custom_error_message)
-        print(f"Official response returned : {response}")
+        logger.error(custom_error_message)
+        logger.error(f"Official response returned : {response}")
     else:
-        print(f"Article post successful")
-        print(f"Article ID : {response.get('id')}")
-        print(f"Article URL : {response.get('url')}")
+        logger.info(f"Article post successful")
+        logger.debug(f"Article ID : {response.get('id')}")
+        logger.info(f"Article URL : {response.get('url')}")
 
 
-def devto_update():
-    reason = """
-    Updation will not be implemented for dev.to since if the title or body is same it returns error.
-    In the error response ID of the already existing post is not returned. 
-    Only solution is to get all the posts and then go through all of them to match either the title or body.
-    Bad design by dev.to
-    """
-    print(reason)
-    # raise UpdationWillNotBeImplemented("dev.to")
+# def devto_update():
+#     reason = """
+#     Updation will not be implemented for dev.to since if the title or body is same it returns error.
+#     In the error response ID of the already existing post is not returned.
+#     Only solution is to get all the posts and then go through all of them to match either the title or body.
+#     Bad design by dev.to
+#     """
+#     print(reason)

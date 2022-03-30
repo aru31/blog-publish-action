@@ -1,10 +1,11 @@
+from asyncio.log import logger
 import frontmatter
 from urllib import request
-from devto import devto_create, devto_update
-from medium import medium_create, medium_update
+from devto import devto_create
+from medium import medium_create
+from hashnode import hashnode_create
 from findfiles import FindFiles
 from constants import (
-    GITHUB_CODES,
     API_URLS,
     MESSAGES
 )
@@ -14,7 +15,8 @@ from custom_exceptions import (
 
 
 class BlogPublishAPI(object):
-    def __init__(self, apikey, owner_repo):
+    def __init__(self, apikey, owner_repo, logger):
+        self.logger = logger
         self.parsedfiles = list()
 
         """
@@ -47,9 +49,9 @@ class BlogPublishAPI(object):
         try:
             # downloading the file with the same name will override the previous file
             request.urlretrieve(url, "blog.md")
-            print(f"Downloading file -> {filename}")
+            self.logger.debug(f"Downloading file -> {filename}")
         except Exception as e:
-            print(f"Error message : {e}")
+            self.logger.error(f"Error message : {e}")
             raise WrongURLException(url)
 
     def parse_and_create_fileinfo(self, file_info):
@@ -57,9 +59,11 @@ class BlogPublishAPI(object):
         parse the .md file to separate body (content) from frontmatter (metadata)
         """
 
-        print("Parsing the markdown file")
+        self.logger.debug("Parsing the markdown file")
         with open("blog.md") as f:
             _metadata, _content = frontmatter.parse(f.read())
+
+        self.logger.debug("Creating the parsed files dict")
         _parseddict = {
             "fileinfo": file_info,
             "metadata": _metadata,
@@ -72,7 +76,7 @@ class BlogPublishAPI(object):
         Parse all the required files
         """
 
-        findfiles = FindFiles(self.owner_repo)
+        findfiles = FindFiles(owner_repo=self.owner_repo, logger=self.logger)
 
         """
         files sample schema: 
@@ -90,32 +94,30 @@ class BlogPublishAPI(object):
             self.parse_and_create_fileinfo(file_info)
 
     def devto_publish(self):
-        """
-        Dev.to publish
-        """
-
         for file in self.parsedfiles:
+            self.logger.info(
+                f"Started processing file : {file['fileinfo']['filename']}")
             if file["metadata"]["publish_devto"]:
-                if file["fileinfo"]["status"] == GITHUB_CODES.ADDED:
-                    devto_create(metadata=file["metadata"], content=file["content"],
-                                apikey=self.apikey, url=API_URLS.DEVTO)
-                if file["fileinfo"]["status"] == GITHUB_CODES.MODIFIED:
-                    devto_update()
+                devto_create(metadata=file["metadata"], content=file["content"],
+                             apikey=self.apikey, url=API_URLS.DEVTO, logger=self.logger)
+                self.logger.info(
+                    f"Completed processing file : {file['fileinfo']['filename']}")
             else:
-                print(f"{MESSAGES.notpublishmessage} dev.to. publish_devto was set to false")
+                self.logger.warning(
+                    f"{MESSAGES.notpublishmessage} dev.to. publish_devto was set to false")
 
     def medium_publish(self):
-        """
-        Dev.to publish
-        """
-
         for file in self.parsedfiles:
+            self.logger.info(
+                f"Started processing file : {file['fileinfo']['filename']}")
             if file["metadata"]["publish_medium"]:
-                if file["fileinfo"]["status"] == GITHUB_CODES.ADDED:
-                    medium_create(metadata=file["metadata"], content=file["content"],
-                                apikey=self.apikey, url=API_URLS.MEDIUM)
-                if file["fileinfo"]["status"] == GITHUB_CODES.MODIFIED:
-                    medium_update()
+                medium_create(metadata=file["metadata"], content=file["content"],
+                              apikey=self.apikey, url=API_URLS.MEDIUM, logger=self.logger)
+                self.logger.info(
+                    f"Completed processing file : {file['fileinfo']['filename']}")
             else:
-                print(f"{MESSAGES.notpublishmessage} medium. publish_medium was set to false")
+                self.logger.warning(
+                    f"{MESSAGES.notpublishmessage} medium. publish_medium was set to false")
 
+    def hashnode_publish(self):
+        hashnode_create()

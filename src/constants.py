@@ -6,7 +6,7 @@ class GITHUB_CODES:
 
 class API_URLS:
     DEVTO = "https://dev.to/api/articles"
-    HASHNODE = ""
+    HASHNODE = "https://api.hashnode.com/"
     MEDIUM = "https://api.medium.com/v1"
     GITHUB = "https://api.github.com/repos"
 
@@ -16,4 +16,4 @@ class CONSTANTS:
 
 
 class MESSAGES:
-    notpublishmessage =f'You didn\'t want the article to be published on.'
+    notpublishmessage = f'You didn\'t want the article to be published on.'

@@ -11,18 +11,20 @@ class FindFiles:
     simplifies it to an list of dictionaries containing useful information
     """
 
-    def __init__(self, owner_repo):
+    def __init__(self, owner_repo, logger):
+        self.logger = logger
         self.owner_repo = owner_repo
         self.latest_files = None
         self.files_changed = []
         self.data = {}
         self.useful_files = []
 
-        print("Processing the files")
+        self.logger.info("Processing the files")
         self._latestCommitFiles()
         self._requiredFiles()
-        print(f"List of file names that changed : {self.files_changed}")
-        print(
+        self.logger.debug(
+            f"List of file names that changed : {self.files_changed}")
+        self.logger.info(
             f"List of dictionary of files to be processed : {self.useful_files}")
 
     def _latestCommitFiles(self):
@@ -54,7 +56,9 @@ class FindFiles:
         """
         for file in self.latest_files:
             self.files_changed.append(file["filename"])
-            if (file["status"] != GITHUB_CODES.REMOVED):
+
+            # only process files that have status of created
+            if (file["status"] == GITHUB_CODES.ADDED):
                 """
                 Expected patterns of file["filename"]:
                 blogs/blog.md
@@ -78,5 +82,3 @@ class FindFiles:
                         self.data["status"] = file["status"]
 
                         self.useful_files.append(self.data)
-
-# c = FindFiles()
