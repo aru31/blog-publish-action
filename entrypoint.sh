@@ -6,6 +6,7 @@ set -e
 echo "Environment variables received"
 echo "website -> ${INPUT_WEBSITE}"
 echo "Repository & owner -> ${INPUT_REPOSITORY}"
+echo "Inside runner -> ${GITHUB_REPOSITORY}"
 echo "-------------------------------------------------------------------------"
 echo "Output of Python Code"
 

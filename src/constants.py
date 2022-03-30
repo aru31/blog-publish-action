@@ -8,3 +8,7 @@ class API_URLS:
     DEVTO = "https://dev.to/api/articles"
     HASHNODE = ""
     MEDIUM = ""
+
+
+class CONSTANTS:
+    FOLDER_NAME = "blogs"

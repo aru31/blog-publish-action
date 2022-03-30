@@ -1,5 +1,5 @@
 import requests
-from constants import GITHUB_CODES
+from constants import GITHUB_CODES, CONSTANTS
 
 # TODO:Use env variables for repository
 # Assumption here is that user pushes a single commit each push
@@ -71,7 +71,7 @@ class FindFiles:
                     Since there can be other md files in the repository and we only want to publish the ones
                     that are in the blogs folder or in its subfolder
                     '''
-                    if(get_file_name[0] == "blogs"):
+                    if(get_file_name[0] == CONSTANTS.FOLDER_NAME):
                         self.data["filename"] = get_file_name[-1]
                         self.data["url"] = file["raw_url"]
                         self.data["status"] = file["status"]
