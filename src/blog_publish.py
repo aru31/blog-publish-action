@@ -3,7 +3,11 @@ from urllib import request
 from devto import devto_create, devto_update
 from findfiles import FindFiles
 from constants import GITHUB_CODES, API_URLS
-from custom_exceptions import UpdationNotImplemented, WrongURLException
+from custom_exceptions import (
+    UpdationNotImplemented,
+    WrongURLException,
+    DidnotWantToPublish
+)
 
 
 class BlogPublishAPI(object):
@@ -53,9 +57,14 @@ class BlogPublishAPI(object):
                 url=file_info["url"], filename=file_info["filename"])
             self.parse_md()
 
-            if file_info["status"] == GITHUB_CODES.ADDED:
-                devto_create(metadata=self.metadata, content=self.content,
-                             apikey=self.apikey, url=API_URLS.DEVTO)
-            if file_info["status"] == GITHUB_CODES.MODIFIED:
-                # raise UpdationNotImplemented("dev.to")
-                devto_update()
+            if self.metadata["publish_devto"]:
+                if file_info["status"] == GITHUB_CODES.ADDED:
+                    devto_create(metadata=self.metadata, content=self.content,
+                                apikey=self.apikey, url=API_URLS.DEVTO)
+                if file_info["status"] == GITHUB_CODES.MODIFIED:
+                    # raise UpdationNotImplemented("dev.to")
+                    devto_update()
+            else:
+                raise DidnotWantToPublish(
+                    info="dev.to. publish_devto was set to false"
+                )

@@ -32,3 +32,9 @@ class MissingFrontmatterException(Exception):
     def __init__(self, info=""):
         message = f'Some frontmatter field is missing, refer readme to know more  {info}'
         super().__init__(message)
+
+
+class DidnotWantToPublish(Exception):
+    def __init__(self, info=""):
+        message = f'You didn\'t want the article to be published on {info}. '
+        super().__init__(message)

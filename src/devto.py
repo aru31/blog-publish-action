@@ -22,7 +22,7 @@ def devto_create(metadata, content, apikey, url):
             "article": {
                 "title": metadata['title'],
                 "body_markdown": content,
-                "published": metadata["published"],
+                "published": metadata["publish_devto"],
                 "series": metadata.get("devto_series"),
                 "main_image": None,
                 "canonical_url": None,
