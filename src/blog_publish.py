@@ -12,10 +12,33 @@ from custom_exceptions import (
 
 class BlogPublishAPI(object):
     def __init__(self, apikey, owner_repo):
-        self.content = None
-        self.metadata = None
+        self.parsedfiles = list()
+
+        """
+        parsed files schema: 
+        [
+            {
+                "fileinfo": {
+                    "filename": "hello.md",
+                    "url": "http://...",
+                    "status": "..."
+                },
+                "metadata": {
+                    "title": "Lorum Ipsum",
+                    "description": "Lorum Ipsum Lorum Ipsum",
+                    ...,
+                    ...,
+                    ...
+                },
+                "content: "Lorum Ipsum Lorum Ipsum Lorum Ipsum"
+            },
+            {}
+        ]
+        """
+
         self.apikey = apikey
         self.owner_repo = owner_repo
+        self.get_all_required_parsed_files()
 
     def download_file(self, url, filename):
         try:
@@ -26,18 +49,24 @@ class BlogPublishAPI(object):
             print(f"Error message : {e}")
             raise WrongURLException(url)
 
-    def parse_md(self):
+    def parse_and_create_fileinfo(self, file_info):
         """
         parse the .md file to separate body (content) from frontmatter (metadata)
         """
 
         print("Parsing the markdown file")
         with open("blog.md") as f:
-            self.metadata, self.content = frontmatter.parse(f.read())
+            _metadata, _content = frontmatter.parse(f.read())
+        _parseddict = {
+            "fileinfo": file_info,
+            "metadata": _metadata,
+            "content": _content
+        }
+        self.parsedfiles.append(_parseddict)
 
-    def devto_publish(self):
+    def get_all_required_parsed_files(self):
         """
-        Dev.to publish
+        Parse all the required files
         """
 
         findfiles = FindFiles(self.owner_repo)
@@ -55,13 +84,19 @@ class BlogPublishAPI(object):
         for file_info in files:
             self.download_file(
                 url=file_info["url"], filename=file_info["filename"])
-            self.parse_md()
+            self.parse_and_create_fileinfo(file_info)
 
-            if self.metadata["publish_devto"]:
-                if file_info["status"] == GITHUB_CODES.ADDED:
+    def devto_publish(self):
+        """
+        Dev.to publish
+        """
+
+        for file in self.parsedfiles:
+            if file["metadata"]["publish_devto"]:
+                if file["fileinfo"]["status"] == GITHUB_CODES.ADDED:
                     devto_create(metadata=self.metadata, content=self.content,
                                 apikey=self.apikey, url=API_URLS.DEVTO)
-                if file_info["status"] == GITHUB_CODES.MODIFIED:
+                if file["fileinfo"]["status"] == GITHUB_CODES.MODIFIED:
                     # raise UpdationNotImplemented("dev.to")
                     devto_update()
             else:
