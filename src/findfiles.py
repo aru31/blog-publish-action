@@ -40,6 +40,11 @@ class FindFiles:
         # getting the latest commit
         latest_commit = requests.get(
             f"{API_URLS.GITHUB}/{self.owner_repo}/commits/{latest_sha}")
+
+        # for for local testing, this commit contains files that were renamed, modified and removed
+        # latest_commit = requests.get(
+        #     "https://api.github.com/repos/aru31/test-blog-publish/commits/fab6b1b208433e4f52dd21afd747e2b629bb432c")
+
         latest_files = latest_commit.json()["files"]
         self.latest_files = latest_files
 
@@ -58,7 +63,7 @@ class FindFiles:
             self.files_changed.append(file["filename"])
 
             # only process files that have status of created
-            if (file["status"] == GITHUB_CODES.ADDED):
+            if (file["status"] == GITHUB_CODES.ADDED or file["status"] == GITHUB_CODES.RENAMED):
                 """
                 Expected patterns of file["filename"]:
                 blogs/blog.md

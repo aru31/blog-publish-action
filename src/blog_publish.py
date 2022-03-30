@@ -1,13 +1,15 @@
 from asyncio.log import logger
 import frontmatter
 from urllib import request
+
+from numpy import var
 from devto import devto_create
 from medium import medium_create
 from hashnode import hashnode_create
 from findfiles import FindFiles
 from constants import (
     API_URLS,
-    MESSAGES
+    Messages
 )
 from custom_exceptions import (
     WrongURLException
@@ -97,27 +99,35 @@ class BlogPublishAPI(object):
         for file in self.parsedfiles:
             self.logger.info(
                 f"Started processing file : {file['fileinfo']['filename']}")
-            if file["metadata"]["publish_devto"]:
+            if file.get("metadata").get("publish_devto") != None:
                 devto_create(metadata=file["metadata"], content=file["content"],
                              apikey=self.apikey, url=API_URLS.DEVTO, logger=self.logger)
                 self.logger.info(
                     f"Completed processing file : {file['fileinfo']['filename']}")
+                self.logger.info("-----------------")
             else:
+                message = Messages(website="devto", variable="publish_devto")
+                self.logger.warning(message.notpublishmessage)
                 self.logger.warning(
-                    f"{MESSAGES.notpublishmessage} dev.to. publish_devto was set to false")
+                    f"Skipping processing of file : {file['fileinfo']['filename']}")
+                self.logger.info("-----------------")
 
     def medium_publish(self):
         for file in self.parsedfiles:
             self.logger.info(
                 f"Started processing file : {file['fileinfo']['filename']}")
-            if file["metadata"]["publish_medium"]:
+            if file.get("metadata").get("publish_medium") != None:
                 medium_create(metadata=file["metadata"], content=file["content"],
                               apikey=self.apikey, url=API_URLS.MEDIUM, logger=self.logger)
                 self.logger.info(
                     f"Completed processing file : {file['fileinfo']['filename']}")
+                self.logger.info("-----------------")
             else:
+                message = Messages(website="medium", variable="publish_medium")
+                self.logger.warning(message.notpublishmessage)
                 self.logger.warning(
-                    f"{MESSAGES.notpublishmessage} medium. publish_medium was set to false")
+                    f"Skipping processing of file : {file['fileinfo']['filename']}")
+                self.logger.info("-----------------")
 
     def hashnode_publish(self):
         hashnode_create()
