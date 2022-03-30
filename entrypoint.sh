@@ -6,7 +6,7 @@ set -e
 echo "Environment variables received"
 echo "website -> ${INPUT_WEBSITE}"
 echo "Repository & owner -> ${GITHUB_REPOSITORY}"
-echo "Log Leve -> ${INPUT_LOG_LEVEL}"
+echo "Log Level -> ${INPUT_LOG_LEVEL}"
 echo "-------------------------------------------------------------------------"
 echo "Output of Python Code"
 
