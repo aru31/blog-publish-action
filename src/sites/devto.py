@@ -25,7 +25,7 @@ def devto_create(metadata, content, apikey, url, logger):
                 "body_markdown": content,
                 "published": metadata[FRONTMATTER.PUBLISH_DEVTO],
                 "series": metadata.get(FRONTMATTER.DEVTO_SERIES),
-                "main_image": metadata["cover_url"],
+                "main_image": metadata[FRONTMATTER.COVER_URL],
                 "canonical_url": None,
                 "description": metadata[FRONTMATTER.DESCRIPTION],
                 "tags": metadata[FRONTMATTER.TAGS],

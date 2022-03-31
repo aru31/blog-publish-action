@@ -26,6 +26,7 @@ class FRONTMATTER:
     PUBLISH_DEVTO = "publish_devto"
     PUBLISH_MEDIUM = "publish_medium"
     PUBLISH_HASHNODE = "publish_hashnode"
+    COVER_URL = "cover_url"
 
 
 class Messages:

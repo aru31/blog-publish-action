@@ -52,30 +52,30 @@ class BlogPublishAPI(object):
 
     def download_file(self, url, filename):
         try:
-            # downloading the file with the same name will override the previous file
+            # downloading the file with the same name, this will overwrite the previous file
             request.urlretrieve(url, "blog.md")
             self.logger.debug(f"Downloading file -> {filename}")
         except Exception as e:
             self.logger.error(f"Error message : {e}")
             raise WrongURLException(url)
 
-    def replace_image_src_with_url(self, filename):
-        """
-        :return: raw url of the hosted image on github
-        """
-
-        replace_with_url(filename)
-
     def parse_and_create_fileinfo(self, file_info):
         """
         parse the .md file to separate body (content) from frontmatter (metadata)
         """
 
+        self.logger.debug("Replacing the image src with GitHub raw URLs")
+        replace_with_url('blog.md')
         self.logger.debug("Parsing the markdown file")
-        self.replace_image_src_with_url('blog.md')
         with open("blog.md") as f:
             _metadata, _content = frontmatter.parse(f.read())
-        _metadata["cover_url"] = get_cover_image(_metadata["cover_url"])
+
+        # checking if cover_url is present in the frontmatter if not then no action is taken
+        self.logger.debug(
+            "Replacing the cover URL in the frontmatter with GitHub raw URL")
+        if _metadata[FRONTMATTER.COVER_URL] != None:
+            _metadata[FRONTMATTER.COVER_URL] = get_cover_image(
+                _metadata[FRONTMATTER.COVER_URL])
 
         self.logger.debug("Creating the parsed files dict")
         _parseddict = {
