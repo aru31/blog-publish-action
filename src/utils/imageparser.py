@@ -21,7 +21,6 @@ def replace_with_url(filename):
     github_username_and_repo = "aru31/test-blog-publish"
     github_branch = "master"
     image_list = get_img_src(filename)
-    print(image_list)
     for relative_image_path in image_list:
         required_path = "media" + relative_image_path['src'].split("media", 1)[1]
         url = f"https://raw.githubusercontent.com/{github_username_and_repo}/{github_branch}/{required_path}"
@@ -34,3 +33,16 @@ def replace_with_url(filename):
         # Write the file out again
         with open(filename, 'w') as file:
             file.write(filedata)
+
+
+def get_cover_image(cover_url):
+    """
+    :param cover_url: frontmatter cover image url
+    :return: cover image hosted github url
+    """
+
+    github_username_and_repo = "aru31/test-blog-publish"
+    github_branch = "master"
+    required_path = "media" + cover_url.split("media", 1)[1]
+    url = f"https://raw.githubusercontent.com/{github_username_and_repo}/{github_branch}/{required_path}"
+    return url

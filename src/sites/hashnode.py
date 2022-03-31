@@ -23,7 +23,8 @@ def hashnode_create(metadata, content, apikey, url, logger):
         createStoryInput = {
             'title': metadata[FRONTMATTER.TITLE],
             'contentMarkdown': content,
-            'tags': []
+            'tags': [],
+            'coverImageURL': metadata["cover_url"]
         }
     except Exception as e:
         logger.error(f"Error Message : {e}")

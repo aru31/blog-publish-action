@@ -5,7 +5,10 @@ from sites.devto import devto_create
 from sites.medium import medium_create
 from sites.hashnode import hashnode_create
 from utils.findfiles import FindFiles
-from utils.imageparser import replace_with_url
+from utils.imageparser import (
+    replace_with_url,
+    get_cover_image
+)
 from constants.constants import (
     API_URLS,
     Messages,
@@ -72,6 +75,7 @@ class BlogPublishAPI(object):
         self.replace_image_src_with_url('blog.md')
         with open("blog.md") as f:
             _metadata, _content = frontmatter.parse(f.read())
+        _metadata["cover_url"] = get_cover_image(_metadata["cover_url"])
 
         self.logger.debug("Creating the parsed files dict")
         _parseddict = {
