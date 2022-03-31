@@ -1,7 +1,6 @@
 import requests
 from constants import GITHUB_CODES, CONSTANTS, API_URLS
 
-# TODO:Use env variables for repository
 # Assumption here is that user pushes a single commit each push
 
 

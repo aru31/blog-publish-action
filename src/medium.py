@@ -1,5 +1,6 @@
 import requests
 from custom_exceptions import MissingFrontmatterException
+from constants import FRONTMATTER
 
 
 def medium_create(metadata, content, apikey, url, logger):
@@ -23,10 +24,10 @@ def medium_create(metadata, content, apikey, url, logger):
 
     try:
         data = {
-            "title": metadata["title"],
+            "title": metadata[FRONTMATTER.TITLE],
             "contentFormat": "markdown",
             "content": content,
-            "tags": metadata["tags"],
+            "tags": metadata[FRONTMATTER.TAGS],
             "publishStatus": "public"
         }
     except Exception as e:

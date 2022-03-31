@@ -1,5 +1,6 @@
 import requests
 from custom_exceptions import MissingFrontmatterException
+from constants import FRONTMATTER
 
 
 def devto_create(metadata, content, apikey, url, logger):
@@ -20,14 +21,14 @@ def devto_create(metadata, content, apikey, url, logger):
     try:
         data = {
             "article": {
-                "title": metadata['title'],
+                "title": metadata[FRONTMATTER.TITLE],
                 "body_markdown": content,
-                "published": metadata["publish_devto"],
-                "series": metadata.get("devto_series"),
+                "published": metadata[FRONTMATTER.PUBLISH_DEVTO],
+                "series": metadata.get(FRONTMATTER.DEVTO_SERIES),
                 "main_image": None,
                 "canonical_url": None,
-                "description": metadata['description'],
-                "tags": metadata['tags'],
+                "description": metadata[FRONTMATTER.DESCRIPTION],
+                "tags": metadata[FRONTMATTER.TAGS],
                 "organization_id": None
             }
         }

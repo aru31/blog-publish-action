@@ -1,5 +1,6 @@
 import requests
 from custom_exceptions import MissingFrontmatterException
+from constants import FRONTMATTER
 
 
 def hashnode_create(metadata, content, apikey, url, logger):
@@ -20,7 +21,7 @@ def hashnode_create(metadata, content, apikey, url, logger):
 
     try:
         createStoryInput = {
-            'title': metadata["title"],
+            'title': metadata[FRONTMATTER.TITLE],
             'contentMarkdown': content,
             'tags': []
         }
@@ -31,7 +32,7 @@ def hashnode_create(metadata, content, apikey, url, logger):
 
     variables = {
         'input': createStoryInput,
-        'publicationId': metadata["hashnode_publication_id"]
+        'publicationId': metadata[FRONTMATTER.HASHNODE_PUBLICATION_ID]
     }
 
     headers = {

@@ -18,6 +18,14 @@ class CONSTANTS:
 
 class FRONTMATTER:
     TITLE = "title"
+    DATE = "date"
+    DESCRIPTION = "description"
+    TAGS = "tags"
+    DEVTO_SERIES = "devto_series"
+    HASHNODE_PUBLICATION_ID = "hashnode_publication_id"
+    PUBLISH_DEVTO = "publish_devto"
+    PUBLISH_MEDIUM = "publish_medium"
+    PUBLISH_HASHNODE = "publish_hashnode"
 
 
 class Messages:

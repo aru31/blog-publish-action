@@ -8,7 +8,8 @@ from hashnode import hashnode_create
 from findfiles import FindFiles
 from constants import (
     API_URLS,
-    Messages
+    Messages,
+    FRONTMATTER
 )
 from custom_exceptions import (
     WrongURLException
@@ -90,15 +91,15 @@ class BlogPublishAPI(object):
 
         # iterating through all the files (list of dictionaries)
         for file_info in files:
-            # self.download_file(
-            #     url=file_info["url"], filename=file_info["filename"])
+            self.download_file(
+                url=file_info["url"], filename=file_info["filename"])
             self.parse_and_create_fileinfo(file_info)
 
     def devto_publish(self):
         for file in self.parsedfiles:
             self.logger.info(
                 f"Started processing file : {file['fileinfo']['filename']}")
-            if file.get("metadata").get("publish_devto") != None:
+            if file.get("metadata").get(FRONTMATTER.PUBLISH_DEVTO) != None:
                 devto_create(metadata=file["metadata"], content=file["content"],
                              apikey=self.apikey, url=API_URLS.DEVTO, logger=self.logger)
                 self.logger.info(
@@ -106,7 +107,7 @@ class BlogPublishAPI(object):
                 self.logger.info("-----------------")
             else:
                 message = Messages.notpublishmessage(
-                    website="devto", variable="publish_devto")
+                    website="devto", variable=FRONTMATTER.PUBLISH_DEVTO)
                 self.logger.warning(message)
                 self.logger.warning(
                     f"Skipping processing of file : {file['fileinfo']['filename']}")
@@ -116,7 +117,7 @@ class BlogPublishAPI(object):
         for file in self.parsedfiles:
             self.logger.info(
                 f"Started processing file : {file['fileinfo']['filename']}")
-            if file.get("metadata").get("publish_medium") != None:
+            if file.get("metadata").get(FRONTMATTER.PUBLISH_MEDIUM) != None:
                 medium_create(metadata=file["metadata"], content=file["content"],
                               apikey=self.apikey, url=API_URLS.MEDIUM, logger=self.logger)
                 self.logger.info(
@@ -124,7 +125,7 @@ class BlogPublishAPI(object):
                 self.logger.info("-----------------")
             else:
                 message = Messages.notpublishmessage(
-                    website="medium", variable="publish_medium")
+                    website="medium", variable=FRONTMATTER.PUBLISH_MEDIUM)
                 self.logger.warning(message)
                 self.logger.warning(
                     f"Skipping processing of file : {file['fileinfo']['filename']}")
@@ -134,8 +135,8 @@ class BlogPublishAPI(object):
         for file in self.parsedfiles:
             self.logger.info(
                 f"Started processing file : {file['fileinfo']['filename']}")
-            if file.get("metadata").get("publish_hashnode") != None:
-                if file.get("metadata").get("hashnode_publication_id") != None:
+            if file.get("metadata").get(FRONTMATTER.PUBLISH_HASHNODE) != None:
+                if file.get("metadata").get(FRONTMATTER.HASHNODE_PUBLICATION_ID) != None:
                     hashnode_create(metadata=file["metadata"], content=file["content"],
                                     apikey=self.apikey, url=API_URLS.HASHNODE, logger=self.logger)
                     self.logger.info(
@@ -143,14 +144,14 @@ class BlogPublishAPI(object):
                     self.logger.info("-----------------")
                 else:
                     message = Messages.nopublicationidmessage(
-                        variable="hashnode_publication_id")
+                        variable=FRONTMATTER.HASHNODE_PUBLICATION_ID)
                     self.logger.warning(message)
                     self.logger.warning(
                         f"Skipping processing of file : {file['fileinfo']['filename']}")
                     self.logger.info("-----------------")
             else:
                 message = Messages.notpublishmessage(
-                    website="hashnode", variable="publish_hashnode")
+                    website="hashnode", variable=FRONTMATTER.PUBLISH_HASHNODE)
                 self.logger.warning(message)
                 self.logger.warning(
                     f"Skipping processing of file : {file['fileinfo']['filename']}")
