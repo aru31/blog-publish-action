@@ -1,6 +1,6 @@
 import requests
-from custom_exceptions import MissingFrontmatterException
-from constants import FRONTMATTER
+from utils.custom_exceptions import MissingFrontmatterException
+from constants.constants import FRONTMATTER
 
 
 def medium_create(metadata, content, apikey, url, logger):

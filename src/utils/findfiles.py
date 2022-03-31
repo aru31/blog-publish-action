@@ -1,5 +1,5 @@
 import requests
-from constants import GITHUB_CODES, CONSTANTS, API_URLS
+from constants.constants import *
 
 # Assumption here is that user pushes a single commit each push
 
@@ -43,6 +43,10 @@ class FindFiles:
         # for for local testing, this commit contains files that were renamed, modified and removed
         # latest_commit = requests.get(
         #     "https://api.github.com/repos/aru31/test-blog-publish/commits/fab6b1b208433e4f52dd21afd747e2b629bb432c")
+
+        # for for local testing, this commit contains files that were renamed, modified and added
+        # latest_commit = requests.get(
+        #     "https://api.github.com/repos/aru31/test-blog-publish/commits/616a26b4f5458f02943113b2ef33149de8db4e62")
 
         latest_files = latest_commit.json()["files"]
         self.latest_files = latest_files

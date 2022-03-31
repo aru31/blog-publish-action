@@ -1,7 +1,8 @@
 import sys
-from custom_exceptions import WebsiteNotSupported, IndexException
+from utils.custom_exceptions import WebsiteNotSupported, IndexException
 from blog_publish import BlogPublishAPI
-from logger import Logger
+from utils.logger import Logger
+
 
 if __name__ == "__main__":
     try:
@@ -12,7 +13,6 @@ if __name__ == "__main__":
     except IndexError as e:
         print(f"Error Message : {e}")
         raise IndexException("api_key, website, owner_repo, log_level")
-
     # initialising the logger
     logger_object = Logger(level=log_level)
     _logger = logger_object.logger
