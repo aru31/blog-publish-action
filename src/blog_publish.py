@@ -2,7 +2,6 @@ from asyncio.log import logger
 import frontmatter
 from urllib import request
 
-from numpy import var
 from devto import devto_create
 from medium import medium_create
 from hashnode import hashnode_create
@@ -91,8 +90,8 @@ class BlogPublishAPI(object):
 
         # iterating through all the files (list of dictionaries)
         for file_info in files:
-            self.download_file(
-                url=file_info["url"], filename=file_info["filename"])
+            # self.download_file(
+            #     url=file_info["url"], filename=file_info["filename"])
             self.parse_and_create_fileinfo(file_info)
 
     def devto_publish(self):
@@ -106,8 +105,9 @@ class BlogPublishAPI(object):
                     f"Completed processing file : {file['fileinfo']['filename']}")
                 self.logger.info("-----------------")
             else:
-                message = Messages(website="devto", variable="publish_devto")
-                self.logger.warning(message.notpublishmessage)
+                message = Messages.notpublishmessage(
+                    website="devto", variable="publish_devto")
+                self.logger.warning(message)
                 self.logger.warning(
                     f"Skipping processing of file : {file['fileinfo']['filename']}")
                 self.logger.info("-----------------")
@@ -123,11 +123,35 @@ class BlogPublishAPI(object):
                     f"Completed processing file : {file['fileinfo']['filename']}")
                 self.logger.info("-----------------")
             else:
-                message = Messages(website="medium", variable="publish_medium")
-                self.logger.warning(message.notpublishmessage)
+                message = Messages.notpublishmessage(
+                    website="medium", variable="publish_medium")
+                self.logger.warning(message)
                 self.logger.warning(
                     f"Skipping processing of file : {file['fileinfo']['filename']}")
                 self.logger.info("-----------------")
 
     def hashnode_publish(self):
-        hashnode_create()
+        for file in self.parsedfiles:
+            self.logger.info(
+                f"Started processing file : {file['fileinfo']['filename']}")
+            if file.get("metadata").get("publish_hashnode") != None:
+                if file.get("metadata").get("hashnode_publication_id") != None:
+                    hashnode_create(metadata=file["metadata"], content=file["content"],
+                                    apikey=self.apikey, url=API_URLS.HASHNODE, logger=self.logger)
+                    self.logger.info(
+                        f"Completed processing file : {file['fileinfo']['filename']}")
+                    self.logger.info("-----------------")
+                else:
+                    message = Messages.nopublicationidmessage(
+                        variable="hashnode_publication_id")
+                    self.logger.warning(message)
+                    self.logger.warning(
+                        f"Skipping processing of file : {file['fileinfo']['filename']}")
+                    self.logger.info("-----------------")
+            else:
+                message = Messages.notpublishmessage(
+                    website="hashnode", variable="publish_hashnode")
+                self.logger.warning(message)
+                self.logger.warning(
+                    f"Skipping processing of file : {file['fileinfo']['filename']}")
+                self.logger.info("-----------------")

@@ -53,13 +53,3 @@ def devto_create(metadata, content, apikey, url, logger):
         logger.info(f"Article post successful")
         logger.debug(f"Article ID : {response.get('id')}")
         logger.info(f"Article URL : {response.get('url')}")
-
-
-# def devto_update():
-#     reason = """
-#     Updation will not be implemented for dev.to since if the title or body is same it returns error.
-#     In the error response ID of the already existing post is not returned.
-#     Only solution is to get all the posts and then go through all of them to match either the title or body.
-#     Bad design by dev.to
-#     """
-#     print(reason)

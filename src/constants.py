@@ -1,6 +1,3 @@
-from numpy import var
-
-
 class GITHUB_CODES:
     REMOVED = "removed"
     ADDED = "added"
@@ -19,11 +16,25 @@ class CONSTANTS:
     FOLDER_NAME = "blogs"
 
 
+class FRONTMATTER:
+    TITLE = "title"
+
+
 class Messages:
-    def __init__(self, website, variable):
-        self.notpublishmessage = f"""
+    @classmethod
+    def notpublishmessage(cls, website, variable):
+        notpublishmessage = f"""
         Either you didn't want to publish the article on {website} 
         and set {variable} to false in markdown frontmatter
         or you forgot to set {variable} in markdown frontmatter
         or you have used the wrong variable format it should be {variable}: True
         """
+        return notpublishmessage
+
+    @classmethod
+    def nopublicationidmessage(cls, variable):
+        nopublicationidmessage = f"""
+        No publication id was provided in the frontmatter of the updloaded markdown file 
+        The format is {variable}: id
+        """
+        return nopublicationidmessage

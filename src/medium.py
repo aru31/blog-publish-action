@@ -70,10 +70,3 @@ def medium_create(metadata, content, apikey, url, logger):
     else:
         logger.error(
             f"Official response returned for userid: {response_userid}")
-
-
-# def medium_update():
-#     reason = """
-#     Updation is not supported by medium API.
-#     """
-#     print(reason)
