@@ -5,6 +5,7 @@ from sites.devto import devto_create
 from sites.medium import medium_create
 from sites.hashnode import hashnode_create
 from utils.findfiles import FindFiles
+from utils.imageparser import replace_with_url
 from constants.constants import (
     API_URLS,
     Messages,
@@ -55,12 +56,20 @@ class BlogPublishAPI(object):
             self.logger.error(f"Error message : {e}")
             raise WrongURLException(url)
 
+    def replace_image_src_with_url(self, filename):
+        """
+        :return: raw url of the hosted image on github
+        """
+
+        replace_with_url(filename)
+
     def parse_and_create_fileinfo(self, file_info):
         """
         parse the .md file to separate body (content) from frontmatter (metadata)
         """
 
         self.logger.debug("Parsing the markdown file")
+        self.replace_image_src_with_url('blog.md')
         with open("blog.md") as f:
             _metadata, _content = frontmatter.parse(f.read())
 
