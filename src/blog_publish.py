@@ -20,7 +20,7 @@ from utils.custom_exceptions import (
 
 
 class BlogPublishAPI(object):
-    def __init__(self, apikey, owner_repo, logger):
+    def __init__(self, apikey, owner_repo, logger, branch):
         self.logger = logger
         self.parsedfiles = list()
 
@@ -48,6 +48,7 @@ class BlogPublishAPI(object):
 
         self.apikey = apikey
         self.owner_repo = owner_repo
+        self.branch = branch
         self.get_all_required_parsed_files()
 
     def download_file(self, url, filename):
@@ -65,7 +66,8 @@ class BlogPublishAPI(object):
         """
 
         self.logger.debug("Replacing the image src with GitHub raw URLs")
-        replace_with_url('blog.md')
+        replace_with_url(filename='blog.md',
+                         owner_repo=self.owner_repo, branch=self.branch)
         self.logger.debug("Parsing the markdown file")
         with open("blog.md") as f:
             _metadata, _content = frontmatter.parse(f.read())
@@ -75,7 +77,7 @@ class BlogPublishAPI(object):
             "Replacing the cover URL in the frontmatter with GitHub raw URL")
         if _metadata[FRONTMATTER.COVER_URL] != None:
             _metadata[FRONTMATTER.COVER_URL] = get_cover_image(
-                _metadata[FRONTMATTER.COVER_URL])
+                cover_url=_metadata[FRONTMATTER.COVER_URL], owner_repo=self.owner_repo, branch=self.branch)
 
         self.logger.debug("Creating the parsed files dict")
         _parseddict = {

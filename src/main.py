@@ -10,24 +10,25 @@ if __name__ == "__main__":
         website = sys.argv[2]
         owner_repo = sys.argv[3]  # aru31/test-blog-publish
         log_level = sys.argv[4]
+        branch = sys.argv[5]  # eg: master
     except IndexError as e:
         print(f"Error Message : {e}")
-        raise IndexException("api_key, website, owner_repo, log_level")
+        raise IndexException("api_key, website, owner_repo, log_level, branch")
     # initialising the logger
     logger_object = Logger(level=log_level)
     _logger = logger_object.logger
 
     if website == 'devto':
         blog_api = BlogPublishAPI(
-            apikey=api_key, owner_repo=owner_repo, logger=_logger)
+            apikey=api_key, owner_repo=owner_repo, logger=_logger, branch=branch)
         blog_api.devto_publish()
     elif website == 'medium':
         blog_api = BlogPublishAPI(
-            apikey=api_key, owner_repo=owner_repo, logger=_logger)
+            apikey=api_key, owner_repo=owner_repo, logger=_logger, branch=branch)
         blog_api.medium_publish()
     elif website == 'hashnode':
         blog_api = BlogPublishAPI(
-            apikey=api_key, owner_repo=owner_repo, logger=_logger)
+            apikey=api_key, owner_repo=owner_repo, logger=_logger, branch=branch)
         blog_api.hashnode_publish()
     else:
         raise WebsiteNotSupported(
