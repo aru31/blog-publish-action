@@ -1,6 +1,7 @@
 # action.yaml
 name: 'Cross Platform Blog Publish'
 description: 'To publish blogs at different blogging websites simultaneously by uploading a markdown to a github repository.'
+author: Sarthak Narayan, Arpit Gupta
 
 inputs:
   website:
@@ -12,6 +13,10 @@ inputs:
   token:
     description: 'The token to use to access the blogging website'
     required: true
+
+branding:
+  icon: 'upload-cloud'
+  color: 'gray-dark'
 
 runs:
   using: 'docker'
