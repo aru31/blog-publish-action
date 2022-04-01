@@ -1,5 +1,4 @@
 import requests
-from utils.custom_exceptions import MissingFrontmatterException
 from constants.constants import FRONTMATTER
 
 
@@ -25,14 +24,13 @@ def hashnode_create(metadata, content, apikey, url, logger):
 
     try:
         createStoryInput = {
-            'title': metadata[FRONTMATTER.TITLE],
+            'title': metadata.get(FRONTMATTER.TITLE),
             'contentMarkdown': content,
             'tags': [],
-            'coverImageURL': metadata[FRONTMATTER.COVER_URL]
+            'coverImageURL': metadata.get(FRONTMATTER.COVER_URL)
         }
     except Exception as e:
         logger.error(f"Error Message : {e}")
-        raise MissingFrontmatterException
     logger.debug("createStoryInput successfully formed")
 
     variables = {

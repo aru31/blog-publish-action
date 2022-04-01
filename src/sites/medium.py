@@ -1,5 +1,4 @@
 import requests
-from utils.custom_exceptions import MissingFrontmatterException
 from constants.constants import FRONTMATTER
 
 
@@ -24,15 +23,14 @@ def medium_create(metadata, content, apikey, url, logger):
 
     try:
         data = {
-            "title": metadata[FRONTMATTER.TITLE],
+            "title": metadata.get(FRONTMATTER.TITLE),
             "contentFormat": "markdown",
             "content": content,
-            "tags": metadata[FRONTMATTER.TAGS],
+            "tags": metadata.get(FRONTMATTER.TAGS),
             "publishStatus": "public"
         }
     except Exception as e:
         print(f"Error Message : {e}")
-        raise MissingFrontmatterException
 
     logger.debug(
         "Data dictionary formed successfully: means metadata was complete")

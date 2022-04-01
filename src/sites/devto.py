@@ -1,5 +1,4 @@
 import requests
-from utils.custom_exceptions import MissingFrontmatterException
 from constants.constants import *
 
 
@@ -21,20 +20,19 @@ def devto_create(metadata, content, apikey, url, logger):
     try:
         data = {
             "article": {
-                "title": metadata[FRONTMATTER.TITLE],
+                "title": metadata.get(FRONTMATTER.TITLE),
                 "body_markdown": content,
-                "published": metadata[FRONTMATTER.PUBLISH_DEVTO],
+                "published": True,
                 "series": metadata.get(FRONTMATTER.DEVTO_SERIES),
-                "main_image": metadata[FRONTMATTER.COVER_URL],
+                "main_image": metadata.get(FRONTMATTER.COVER_URL),
                 "canonical_url": None,
-                "description": metadata[FRONTMATTER.DESCRIPTION],
-                "tags": metadata[FRONTMATTER.TAGS],
+                "description": metadata.get(FRONTMATTER.DESCRIPTION),
+                "tags": metadata.get(FRONTMATTER.TAGS),
                 "organization_id": None
             }
         }
     except Exception as e:
         logger.error(f"Error Message : {e}")
-        raise MissingFrontmatterException
     logger.debug(
         "Data dictionary formed successfully: means metadata was complete")
 
