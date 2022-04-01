@@ -9,9 +9,6 @@ inputs:
   log_level:
     description: 'Log level for the logger'
     required: true
-  token_github:
-    description: 'The token to use to access the GitHub API'
-    required: true
   token:
     description: 'The token to use to access the blogging website'
     required: true
@@ -22,5 +19,4 @@ runs:
   args:
     - ${{ inputs.website }}
     - ${{ inputs.log_level }}
-    - ${{ inputs.token_github }}
     - ${{ inputs.token }}
