@@ -1,6 +1,6 @@
 # action.yaml
-name: 'Blog Custom Github Action'
-description: 'Action Testing'
+name: 'Cross Platform Blog Publish'
+description: 'To publish blogs at different blogging websites simultaneously by uploading a markdown to a github repository.'
 
 inputs:
   website:
