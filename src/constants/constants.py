@@ -18,7 +18,6 @@ class CONSTANTS:
 
 class FRONTMATTER:
     TITLE = "title"
-    DATE = "date"
     DESCRIPTION = "description"
     TAGS = "tags"
     DEVTO_SERIES = "devto_series"

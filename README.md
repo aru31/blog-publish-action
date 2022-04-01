@@ -110,6 +110,18 @@ While writing a blog you can store the images in the media folder and reference 
 
 All the images in GitHub are stored using raw URLs.
 
+## Markdown Metadata Fields
+| Markdown Metadata fields (Case sensitive) | Blog websites | Use case                                                               | If not provided                        |
+|-------------------------------------------|---------------|------------------------------------------------------------------------|----------------------------------------|
+| title                                     |               | Title of the blog                                                      | Set title: Untitled                    |
+| description                               |               | description                                                            | NA                                     |
+| tags                                      |               | Tags for the blog. Example #linux                                      | NA                                     |
+| cover_url                                 |               | Cover URL of the blog                                                  | NA                                     |
+| hashnode_publication_id                   |               | Publish to a particular publication                                    | Blog on Hashnode will not be published |
+| publish_devto                             |               | Boolean field to specify if you want the blog to published on dev.to   | It will not be published on dev.to     |
+| publish_medium                            |               | Boolean field to specify if you want the blog to published on medium   | It will not be published on medium     |
+| publish_hashnode                          |               | Boolean field to specify if you want the blog to published on hashnode | It will not be published on hashnode   |
+
 ## To Do
 
 - [ ] Support html format.
