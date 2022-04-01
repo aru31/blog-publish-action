@@ -26,17 +26,18 @@ project
 │       │   action.yml
 │
 └───media
+│   │   profile.png
 │   └───engineering
 │       │   tesla.png
 │       │   edison.jpeg
 │       │   best_friends.jpeg
-│   profile.png
+│   
 │───blogs
+│   │   blog.md
 │   └───engineering
 │       │   scientist.md
 │       │   ceo.md
 │       │   mba.md
-│   blog.md
 ```
 
 5. Copy the action.yml folder as provided in .github/workflows directory.
