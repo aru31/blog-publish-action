@@ -75,7 +75,7 @@ class BlogPublishAPI(object):
         # checking if cover_url is present in the frontmatter if not then no action is taken
         self.logger.debug(
             "Replacing the cover URL in the frontmatter with GitHub raw URL")
-        if _metadata[FRONTMATTER.COVER_URL] != None:
+        if _metadata.get(FRONTMATTER.COVER_URL) != None:
             _metadata[FRONTMATTER.COVER_URL] = get_cover_image(
                 cover_url=_metadata[FRONTMATTER.COVER_URL], owner_repo=self.owner_repo, branch=self.branch)
 
