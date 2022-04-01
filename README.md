@@ -168,17 +168,16 @@ _This is italic text_
 </details>
 
 ## Markdown Metadata Fields
-
-| Markdown Metadata fields (Case sensitive) | Blog websites | Use case                                                               | If not provided                        |
-| ----------------------------------------- | ------------- | ---------------------------------------------------------------------- | -------------------------------------- |
-| title                                     |               | Title of the blog                                                      | Set title: Untitled                    |
-| description                               |               | description                                                            | NA                                     |
-| tags                                      |               | Tags for the blog. Example #linux                                      | NA                                     |
-| cover_url                                 |               | Cover URL of the blog                                                  | NA                                     |
-| hashnode_publication_id                   |               | Publish to a particular publication                                    | Blog on Hashnode will not be published |
-| publish_devto                             |               | Boolean field to specify if you want the blog to published on dev.to   | It will not be published on dev.to     |
-| publish_medium                            |               | Boolean field to specify if you want the blog to published on medium   | It will not be published on medium     |
-| publish_hashnode                          |               | Boolean field to specify if you want the blog to published on hashnode | It will not be published on hashnode   |
+| Markdown Metadata fields (Case sensitive) | Blogging websites supported | Use case                                                               | If not provided                        |
+|-------------------------------------------|-----------------------------|------------------------------------------------------------------------|----------------------------------------|
+| title                                     | dev.to/medium/hashnode      | Title of the blog                                                      | Set title: Untitled                    |
+| description                               | dev.to/medium/hashnode      | description                                                            | NA                                     |
+| tags                                      | dev.to/medium/hashnode      | Tags for the blog. Example #linux                                      | NA                                     |
+| cover_url                                 | dev.to/medium/hashnode      | Cover URL of the blog                                                  | NA                                     |
+| hashnode_publication_id                   | hashnode                    | Publish to a particular publication                                    | Blog on Hashnode will not be published |
+| publish_devto                             | dev.to                      | Boolean field to specify if you want the blog to published on dev.to   | It will not be published on dev.to     |
+| publish_medium                            | medium                      | Boolean field to specify if you want the blog to published on medium   | It will not be published on medium     |
+| publish_hashnode                          | hashnode                    | Boolean field to specify if you want the blog to published on hashnode | It will not be published on hashnode   |
 
 ## To Do
 
