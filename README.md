@@ -11,6 +11,23 @@ This action is triggered by a push and can also be triggered manually.
 - Medium
 - Hashnode
 
+### Usage
+
+```yaml
+name: blog-publish-github-action
+on: [push, workflow_dispatch]
+jobs:
+  devto-blog-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use blog publish github action for devto
+        uses: aru31/blog-publish-action@master
+        with:
+          website: "devto"
+          log_level: "info"
+          token: ${{ secrets.DEVTO_TOKEN }}
+```
+
 ### Info
 
 - Type of markdown we are using -> GitHub Markdown
@@ -48,7 +65,7 @@ project
 5. Copy the sample action.yml folder as provided in `.github/workflows` directory.
 
 <details>
-<summary>Sample action.yml file</summary>
+<summary>sample action.yml file publishing to all supported websites in different jobs </summary>
 <p>
 
 ```yaml
@@ -63,7 +80,6 @@ jobs:
         with:
           website: "devto"
           log_level: "info"
-          token_github: ${{ secrets.GITHUB_TOKEN }}
           token: ${{ secrets.DEVTO_TOKEN }}
 
   medium-blog-publish:
@@ -74,7 +90,6 @@ jobs:
         with:
           website: "medium"
           log_level: "info"
-          token_github: ${{ secrets.GITHUB_TOKEN }}
           token: ${{ secrets.MEDIUM_TOKEN }}
 
   hashnode-blog-publish:
@@ -85,7 +100,6 @@ jobs:
         with:
           website: "hashnode"
           log_level: "info"
-          token_github: ${{ secrets.GITHUB_TOKEN }}
           token: ${{ secrets.HASHNODE_TOKEN }}
 ```
 
@@ -191,6 +205,10 @@ _This is italic text_
   - [Code Folding](https://gist.github.com/pierrejoubert73/902cc94d79424356a8d20be2b382e1ab) not supported.
 - Hashnode
   - Use of tags.
+
+### License
+
+The scripts and documentation in this project are released under the [GPL3.0](https://github.com/aru31/blog-publish-action/blob/master/LICENSE)
 
 ### Developer Tips
 
