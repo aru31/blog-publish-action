@@ -65,7 +65,7 @@ project
 5. Copy the sample action.yml folder as provided in `.github/workflows` directory.
 
 <details>
-<summary>sample action.yml file publishing to all supported websites in different jobs </summary>
+<summary style="font-weight:bold;">Sample <code>action.yml</code> file publishing to all supported websites in different jobs </summary>
 <p>
 
 ```yaml
@@ -127,7 +127,7 @@ All the images in GitHub are stored using raw URLs.
 ### Sample blog.md file
 
 <details>
-<summary>Sample blog.md file</summary>
+<summary style="font-weight:bold;">Sample <code>blog.md</code> file</summary>
 <p>
 
 ````md
