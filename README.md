@@ -104,13 +104,13 @@ jobs:
   **Example:** `<img src="../media/profile.png" alt="Profile Picture">`
 - Blogs should be added to the blogs folder and any media should be added to the media folder. You can have as many sub folders within them as required.
 
-## How do we support images
+### How do we support images
 
 While writing a blog you can store the images in the media folder and reference them using relative paths. Once pushed the action parses the markdown file and replaces `<img src="../media/profile.png" alt="Profile Picture">` with `https://raw.githubusercontent.com/{Username}/{Repository}/{Branch}/media/profile.png`
 
 All the images in GitHub are stored using raw URLs.
 
-## Sample blog.md file
+### Sample blog.md file
 
 <details>
 <summary>Sample blog.md file</summary>
@@ -167,9 +167,10 @@ _This is italic text_
 </p>
 </details>
 
-## Markdown Metadata Fields
+### Markdown Metadata Fields
+
 | Markdown Metadata fields (Case sensitive) | Blogging websites supported | Use case                                                               | If not provided                        |
-|-------------------------------------------|-----------------------------|------------------------------------------------------------------------|----------------------------------------|
+| ----------------------------------------- | --------------------------- | ---------------------------------------------------------------------- | -------------------------------------- |
 | title                                     | dev.to/medium/hashnode      | Title of the blog                                                      | Set title: Untitled                    |
 | description                               | dev.to/medium/hashnode      | description                                                            | NA                                     |
 | tags                                      | dev.to/medium/hashnode      | Tags for the blog. Example #linux                                      | NA                                     |
@@ -179,7 +180,7 @@ _This is italic text_
 | publish_medium                            | medium                      | Boolean field to specify if you want the blog to published on medium   | It will not be published on medium     |
 | publish_hashnode                          | hashnode                    | Boolean field to specify if you want the blog to published on hashnode | It will not be published on hashnode   |
 
-## To Do
+### To Do
 
 - [ ] Support html format.
 - [ ] Support update request for blogs.
@@ -191,8 +192,29 @@ _This is italic text_
 - Hashnode
   - Use of tags.
 
-## Developer Tips
+### Developer Tips
 
 - You can change the logging level incase you are debugging
 
-## References
+### References
+
+#### Related to GitHub Actions
+
+- [Custom GitHub Actions in Node.js - GitHub Actions JavaScript Tutorial - YouTube](https://www.youtube.com/watch?v=Ef0gPGUh9oo)
+- [How to Build Your First JavaScript GitHub Action](https://www.freecodecamp.org/news/build-your-first-javascript-github-action/)
+- [4 Steps to Creating a Custom GitHub Action](https://betterprogramming.pub/4-steps-to-creating-a-custom-github-action-d67c4cf0445a)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+
+#### Related to Hashnode
+
+- [How to use hashnode API and get api keys](https://samwalpole.com/i-wrote-this-article-using-the-hashnode-api-heres-how)
+- [How To Post Articles From Your Existing CMS Using The Hashnode API](https://blog.huntertrammell.dev/how-to-post-articles-from-your-existing-cms-using-the-hashnode-api)
+
+#### Related to Dev.to
+
+- [Dev.to API docs](https://developers.forem.com/api#operation/getArticleById)
+- [How to get dev.to and hashnode api keys](https://dev.to/codybontecou/post-to-dev-hashnode-and-medium-using-their-apis-54k4)
+
+#### Related to medium
+
+- [Using REST API in medium](https://medium.com/geekculture/rest-api-in-medium-8539340f2650)
