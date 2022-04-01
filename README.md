@@ -110,9 +110,67 @@ While writing a blog you can store the images in the media folder and reference 
 
 All the images in GitHub are stored using raw URLs.
 
+## Sample blog.md file
+
+<details>
+<summary>Sample blog.md file</summary>
+<p>
+
+````md
+---
+title: Title of the blog
+description: Description of the blog
+tags:
+  - post
+  - tag
+cover_url: ../**/media/cover.jpg
+
+# dev_to specific metadata
+devto_series: "Linux"
+
+# hashnode specific metadata
+hashnode_publication_id: 6243f3afa8722ae0e658142d
+
+# bool values, if False or not provided then the blog will not be published on that platform
+publish_devto: True
+publish_medium: True
+publish_hashnode: True
+---
+
+Content/body of the markdown file.
+
+Using images:
+<img src="../media/google.png" alt="another tag" />
+
+```python
+def python():
+  pass
+```
+
+**This is bold text**
+
+_This is italic text_
+
+`This is inline code`
+
+[This is a link](www.google.com)
+
+# Heading 1
+
+##### Heading 5
+
+- Bullet points
+
+1. Number points
+````
+
+</p>
+</details>
+
 ## Markdown Metadata Fields
+
 | Markdown Metadata fields (Case sensitive) | Blog websites | Use case                                                               | If not provided                        |
-|-------------------------------------------|---------------|------------------------------------------------------------------------|----------------------------------------|
+| ----------------------------------------- | ------------- | ---------------------------------------------------------------------- | -------------------------------------- |
 | title                                     |               | Title of the blog                                                      | Set title: Untitled                    |
 | description                               |               | description                                                            | NA                                     |
 | tags                                      |               | Tags for the blog. Example #linux                                      | NA                                     |
@@ -137,3 +195,5 @@ All the images in GitHub are stored using raw URLs.
 ## Developer Tips
 
 - You can change the logging level incase you are debugging
+
+## References
