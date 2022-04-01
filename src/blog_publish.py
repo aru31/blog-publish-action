@@ -113,7 +113,10 @@ class BlogPublishAPI(object):
         for file in self.parsedfiles:
             self.logger.info(
                 f"Started processing file : {file['fileinfo']['filename']}")
-            if file.get("metadata").get(FRONTMATTER.PUBLISH_DEVTO) != None:
+
+            conditions = (file.get("metadata").get(FRONTMATTER.PUBLISH_DEVTO) != None
+                          and file.get("metadata").get(FRONTMATTER.PUBLISH_DEVTO) == True)
+            if conditions:
                 devto_create(metadata=file["metadata"], content=file["content"],
                              apikey=self.apikey, url=API_URLS.DEVTO, logger=self.logger)
                 self.logger.info(
@@ -131,7 +134,10 @@ class BlogPublishAPI(object):
         for file in self.parsedfiles:
             self.logger.info(
                 f"Started processing file : {file['fileinfo']['filename']}")
-            if file.get("metadata").get(FRONTMATTER.PUBLISH_MEDIUM) != None:
+
+            conditions = (file.get("metadata").get(FRONTMATTER.PUBLISH_MEDIUM) != None
+                          and file.get("metadata").get(FRONTMATTER.PUBLISH_MEDIUM) == True)
+            if conditions:
                 medium_create(metadata=file["metadata"], content=file["content"],
                               apikey=self.apikey, url=API_URLS.MEDIUM, logger=self.logger)
                 self.logger.info(
@@ -149,7 +155,10 @@ class BlogPublishAPI(object):
         for file in self.parsedfiles:
             self.logger.info(
                 f"Started processing file : {file['fileinfo']['filename']}")
-            if file.get("metadata").get(FRONTMATTER.PUBLISH_HASHNODE) != None:
+
+            conditions = (file.get("metadata").get(FRONTMATTER.PUBLISH_HASHNODE) != None
+                          and file.get("metadata").get(FRONTMATTER.PUBLISH_HASHNODE) == True)
+            if conditions:
                 if file.get("metadata").get(FRONTMATTER.HASHNODE_PUBLICATION_ID) != None:
                     hashnode_create(metadata=file["metadata"], content=file["content"],
                                     apikey=self.apikey, url=API_URLS.HASHNODE, logger=self.logger)

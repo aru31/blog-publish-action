@@ -14,6 +14,10 @@ def hashnode_create(metadata, content, apikey, url, logger):
                 message
                 post {
                     slug
+                    title
+                    author {
+                        username
+                    }
                 }
             }
         }
