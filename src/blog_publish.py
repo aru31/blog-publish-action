@@ -72,6 +72,10 @@ class BlogPublishAPI(object):
         with open("blog.md") as f:
             _metadata, _content = frontmatter.parse(f.read())
 
+        # Give default title as 'Untitiled; if metadata['title'] == None
+        if _metadata.get(FRONTMATTER.TITLE) == None:
+            _metadata[FRONTMATTER.TITLE] = 'Untitled'
+
         # checking if cover_url is present in the frontmatter if not then no action is taken
         self.logger.debug(
             "Replacing the cover URL in the frontmatter with GitHub raw URL")

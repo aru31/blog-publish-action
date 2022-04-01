@@ -51,4 +51,4 @@ def devto_create(metadata, content, apikey, url, logger):
     else:
         logger.info(f"Article post successful")
         logger.debug(f"Article ID : {response.get('id')}")
-        logger.info(f"Article URL : {response.get('url')}")
+        logger.info(f"Article URL : {response.get('url')} ")

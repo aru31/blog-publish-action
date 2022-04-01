@@ -63,7 +63,7 @@ def medium_create(metadata, content, apikey, url, logger):
         if response.get("data") != None:
             logger.info(f"Article post successful")
             logger.debug(f"Article ID : {response['data']['id']}")
-            logger.info(f"Article URL : {response['data']['url']}")
+            logger.info(f"Article URL : {response['data']['url']} ")
         else:
             logger.error(f"Official response returned for publish: {response}")
     else:
